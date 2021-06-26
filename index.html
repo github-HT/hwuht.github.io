@@ -1,1 +1,291 @@
-Hello World
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>双色球</title>
+    <link rel="stylesheet" href="css/bulma.min.css">
+    <script src="js/vue.min.js"></script>
+    <script src="js/index.js"></script>
+</head>
+
+<body>
+    <section class="section" id="app">
+        <div class="container has-text-centered">
+            <div class="field">
+                <div class="control is-flex is-justify-content-center">
+                    <figure class="image is-128x128">
+                        <img src="image/dounleColorBall.jpeg" alt="">
+                    </figure>
+                </div>
+            </div>
+            <div class="field">
+                <template v-for="(item,i) in doubleColorBall">
+                    <div :key="'doubleColorBall' + i"
+                        class="control is-flex is-justify-content-center has-text-white  is-flex-wrap-wrap">
+                        <template v-for="(it,k) in item">
+                            <figure :key="'doubleColorBallItem'+k"
+                                class="image is-48x48 is-rounded is-flex is-justify-content-center is-align-items-center m-1"
+                                :class="{'has-background-danger-dark': k != item.length - 1,'has-background-link-dark': k == item.length - 1}">
+                                {{it}}
+                            </figure>
+                        </template>
+                    </div>
+                </template>
+            </div>
+            <div class="field">
+                <div class="control">
+                    <button class="button is-link" @click="getDoubleColorBall">随机取号</button>
+                </div>
+            </div>
+            <div class="field is-hidden">
+                <div class="control">
+                    <h2>双色球数字汇总</h2>
+                </div>
+            </div>
+            <div class="field is-hidden">
+                <div class="control is-flex is-justify-content-center has-text-white is-flex-wrap-wrap">
+                    <template v-for="(it,k) in ballNumberCollectForRed">
+                        <figure :key="'ballNumberCollectForRedItem'+k"
+                            class="image is-48x48 is-rounded is-flex is-justify-content-center is-align-items-center m-1 has-background-danger-dark">
+                            {{it}}
+                        </figure>
+                    </template>
+                    <template v-for="(it,k) in ballNumberCollectForBlue">
+                        <figure :key="'ballNumberCollectForBlue'+k"
+                            class="image is-48x48 is-rounded is-flex is-justify-content-center is-align-items-center m-1 has-background-link-dark">
+                            {{it}}
+                        </figure>
+                    </template>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="js/index.js"></script>
+
+    <footer class="footer">
+        <div class="content">
+            <h1>双色球玩法</h1>
+            <br>
+            <h2
+                style="margin: 20px 0px; padding: 0px; border: 0px; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-stretch: inherit; font-size: 24px; line-height: 24px; font-family: 微软雅黑, Helvetica, Arial, sans-serif; font-weight: normal; color: rgb(183, 54, 52); text-indent: 10px; position: relative; white-space: normal;">
+                第一章 总 则
+            </h2>
+            <p
+                style="margin-top: 10px; margin-bottom: 0px; padding: 0px; border: 0px; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-stretch: inherit; line-height: 36px; font-family: 宋体, sans-serif; color: rgb(51, 51, 51); text-indent: 2em; white-space: normal;">
+                第一条 本规则依据财政部《彩票发行与销售管理暂行规定》和《中国福利彩票（电脑型）联合发行与销售管理暂行办法》（以下简称《管理办法》）制定。
+            </p>
+            <p
+                style="margin-top: 10px; margin-bottom: 0px; padding: 0px; border: 0px; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-stretch: inherit; line-height: 36px; font-family: 宋体, sans-serif; color: rgb(51, 51, 51); text-indent: 2em; white-space: normal;">
+                第二条 中国福利彩票&quot;双色球&quot;（以下简称&quot;双色球&quot;）是一种联合发行的&quot;乐透型&quot;福利彩票。采用计算机网络系统发行销售，定期电视开奖。
+            </p>
+            <p
+                style="margin-top: 10px; margin-bottom: 0px; padding: 0px; border: 0px; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-stretch: inherit; line-height: 36px; font-family: 宋体, sans-serif; color: rgb(51, 51, 51); text-indent: 2em; white-space: normal;">
+                第三条 &quot;双色球&quot;由中国福利彩票发行管理中心（以下简称中福彩中心）统一组织发行，在全国销售。
+            </p>
+            <p
+                style="margin-top: 10px; margin-bottom: 0px; padding: 0px; border: 0px; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-stretch: inherit; line-height: 36px; font-family: 宋体, sans-serif; color: rgb(51, 51, 51); text-indent: 2em; white-space: normal;">
+                第四条 参与&quot;双色球&quot;销售的省级行政区域福利彩票发行中心（以下称省中心）在中福彩中心的直接领导下，负责对本地区的&quot;双色球&quot;销售活动实施具体的组织和管理。
+            </p>
+            <p
+                style="margin-top: 10px; margin-bottom: 0px; padding: 0px; border: 0px; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-stretch: inherit; line-height: 36px; font-family: 宋体, sans-serif; color: rgb(51, 51, 51); text-indent: 2em; white-space: normal;">
+                第五条 &quot;双色球&quot;彩票实行自愿购买，凡购买者均被视为同意并遵守本规则。
+            </p>
+            <h2
+                style="margin: 20px 0px; padding: 0px; border: 0px; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-stretch: inherit; font-size: 24px; line-height: 24px; font-family: 微软雅黑, Helvetica, Arial, sans-serif; font-weight: normal; color: rgb(183, 54, 52); text-indent: 10px; position: relative; white-space: normal;">
+                第二章 游 戏
+            </h2>
+            <p
+                style="margin-top: 10px; margin-bottom: 0px; padding: 0px; border: 0px; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-stretch: inherit; line-height: 36px; font-family: 宋体, sans-serif; color: rgb(51, 51, 51); text-indent: 2em; white-space: normal;">
+                第六条 &quot;双色球&quot;彩票投注区分为红色球号码区和蓝色球号码区。
+            </p>
+            <p
+                style="margin-top: 10px; margin-bottom: 0px; padding: 0px; border: 0px; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-stretch: inherit; line-height: 36px; font-family: 宋体, sans-serif; color: rgb(51, 51, 51); text-indent: 2em; white-space: normal;">
+                第七条 &quot;双色球&quot;每注投注号码由6个红色球号码和1个蓝色球号码组成。红色球号码从1--33中选择；蓝色球号码从1--16中选择。
+            </p>
+            <p
+                style="margin-top: 10px; margin-bottom: 0px; padding: 0px; border: 0px; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-stretch: inherit; line-height: 36px; font-family: 宋体, sans-serif; color: rgb(51, 51, 51); text-indent: 2em; white-space: normal;">
+                第八条 &quot;双色球&quot;每注2元。
+            </p>
+            <p
+                style="margin-top: 10px; margin-bottom: 0px; padding: 0px; border: 0px; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-stretch: inherit; line-height: 36px; font-family: 宋体, sans-serif; color: rgb(51, 51, 51); text-indent: 2em; white-space: normal;">
+                第九条 &quot;双色球&quot;采取全国统一奖池计奖。
+            </p>
+            <p
+                style="margin-top: 10px; margin-bottom: 0px; padding: 0px; border: 0px; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-stretch: inherit; line-height: 36px; font-family: 宋体, sans-serif; color: rgb(51, 51, 51); text-indent: 2em; white-space: normal;">
+                第十条 &quot;双色球&quot;每周销售三期，期号以开奖日界定，按日历年度编排。
+            </p>
+            <h2
+                style="margin: 20px 0px; padding: 0px; border: 0px; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-stretch: inherit; font-size: 24px; line-height: 24px; font-family: 微软雅黑, Helvetica, Arial, sans-serif; font-weight: normal; color: rgb(183, 54, 52); text-indent: 10px; position: relative; white-space: normal;">
+                第三章 投 注
+            </h2>
+            <p
+                style="margin-top: 10px; margin-bottom: 0px; padding: 0px; border: 0px; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-stretch: inherit; line-height: 36px; font-family: 宋体, sans-serif; color: rgb(51, 51, 51); text-indent: 2em; white-space: normal;">
+                第十一条 &quot;双色球&quot;的投注方法可分为自选号码投注和机选号码投注;其投注方式有单式投注和复式投注。
+            </p>
+            <p
+                style="margin-top: 10px; margin-bottom: 0px; padding: 0px; border: 0px; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-stretch: inherit; line-height: 36px; font-family: 宋体, sans-serif; color: rgb(51, 51, 51); text-indent: 2em; white-space: normal;">
+                第十二条 自选号码投注是指由投注者自行选定投注号码的投注。
+            </p>
+            <p
+                style="margin-top: 10px; margin-bottom: 0px; padding: 0px; border: 0px; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-stretch: inherit; line-height: 36px; font-family: 宋体, sans-serif; color: rgb(51, 51, 51); text-indent: 2em; white-space: normal;">
+                第十三条 机选号码投注是指由投注机为投注者随机产生投注号码的投注。
+            </p>
+            <p
+                style="margin-top: 10px; margin-bottom: 0px; padding: 0px; border: 0px; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-stretch: inherit; line-height: 36px; font-family: 宋体, sans-serif; color: rgb(51, 51, 51); text-indent: 2em; white-space: normal;">
+                第十四条 单式投注是从红色球号码中选择6个号码，从蓝色球号码中选择1个号码，组合为一注投注号码的投注。
+            </p>
+            <p
+                style="margin-top: 10px; margin-bottom: 0px; padding: 0px; border: 0px; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-stretch: inherit; line-height: 36px; font-family: 宋体, sans-serif; color: rgb(51, 51, 51); text-indent: 2em; white-space: normal;">
+                第十五条 复式投注有三种：
+            </p>
+            <p
+                style="margin-top: 10px; margin-bottom: 0px; padding: 0px; border: 0px; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-stretch: inherit; line-height: 36px; font-family: 宋体, sans-serif; color: rgb(51, 51, 51); text-indent: 2em; white-space: normal;">
+                （一）红色球号码复式：从红色球号码中选择7--20个号码，从蓝色球号码中选择1个号码，组合成多注投注号码的投注。
+            </p>
+            <p
+                style="margin-top: 10px; margin-bottom: 0px; padding: 0px; border: 0px; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-stretch: inherit; line-height: 36px; font-family: 宋体, sans-serif; color: rgb(51, 51, 51); text-indent: 2em; white-space: normal;">
+                （二）蓝色球号码复式：从红色球号码中选择6个号码，从蓝色球号码中选择2--16个号码，组合成多注投注号码的投注。
+            </p>
+            <p
+                style="margin-top: 10px; margin-bottom: 0px; padding: 0px; border: 0px; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-stretch: inherit; line-height: 36px; font-family: 宋体, sans-serif; color: rgb(51, 51, 51); text-indent: 2em; white-space: normal;">
+                （三）全复式：从红色球号码中选择7--20个号码，从蓝色球号码中选择2--16个号码，组合成多注投注号码的投注。
+            </p>
+            <h2
+                style="margin: 20px 0px; padding: 0px; border: 0px; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-stretch: inherit; font-size: 24px; line-height: 24px; font-family: 微软雅黑, Helvetica, Arial, sans-serif; font-weight: normal; color: rgb(183, 54, 52); text-indent: 10px; position: relative; white-space: normal;">
+                第四章 设 奖
+            </h2>
+            <p
+                style="margin-top: 10px; margin-bottom: 0px; padding: 0px; border: 0px; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-stretch: inherit; line-height: 36px; font-family: 宋体, sans-serif; color: rgb(51, 51, 51); text-indent: 2em; white-space: normal;">
+                第十六条 &quot;双色球&quot;设奖奖金为销售总额的50%，其中当期奖金为销售总额的49%，调节基金为销售总额的1%。
+            </p>
+            <p
+                style="margin-top: 10px; margin-bottom: 0px; padding: 0px; border: 0px; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-stretch: inherit; line-height: 36px; font-family: 宋体, sans-serif; color: rgb(51, 51, 51); text-indent: 2em; white-space: normal;">
+                第十七条 &quot;双色球&quot;奖级设置分为高等奖和低等奖。一等奖和二等奖为高等奖，三至六等奖为低等奖。高等奖采用浮动设奖，低等奖采用固定设奖。当期奖金减去当期低等奖奖金为当期高等奖奖金。设奖如下：
+            </p>
+            <p
+                style="margin-top: 10px; margin-bottom: 0px; padding: 0px; border: 0px; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-stretch: inherit; line-height: 36px; font-family: 宋体, sans-serif; color: rgb(51, 51, 51); text-indent: 2em; white-space: normal;">
+                第十八条 根据国家有关规定，&quot;双色球&quot;彩票单注奖金封顶的最高限额为500万元。
+            </p>
+            <p
+                style="margin-top: 10px; margin-bottom: 0px; padding: 0px; border: 0px; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-stretch: inherit; line-height: 36px; font-family: 宋体, sans-serif; color: rgb(51, 51, 51); text-indent: 2em; white-space: normal;">
+                第十九条 &quot;双色球&quot;设立奖池。奖池资金来源：未中出的高等奖奖金和超出单注封顶限额部分的奖金。奖池资金计入下期一等奖。
+            </p>
+            <p
+                style="margin-top: 10px; margin-bottom: 0px; padding: 0px; border: 0px; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-stretch: inherit; line-height: 36px; font-family: 宋体, sans-serif; color: rgb(51, 51, 51); text-indent: 2em; white-space: normal;">
+                第二十条
+                当一等奖的单注奖额低于二等奖的单注奖额时，将一、二等奖的奖金相加，由一、二等奖中奖者平分；当一、二等奖的单注奖额低于三等奖奖额时，补足为三等奖奖额。当期奖金不足的部分由调节基金补充，调节基金不足时，从发行费列支。
+            </p>
+            <h2
+                style="margin: 20px 0px; padding: 0px; border: 0px; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-stretch: inherit; font-size: 24px; line-height: 24px; font-family: 微软雅黑, Helvetica, Arial, sans-serif; font-weight: normal; color: rgb(183, 54, 52); text-indent: 10px; position: relative; white-space: normal;">
+                第五章 开 奖
+            </h2>
+            <p
+                style="margin-top: 10px; margin-bottom: 0px; padding: 0px; border: 0px; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-stretch: inherit; line-height: 36px; font-family: 宋体, sans-serif; color: rgb(51, 51, 51); text-indent: 2em; white-space: normal;">
+                第二十一条 &quot;双色球&quot;由中福彩中心统一开奖，每周开奖三次。开奖前，省中心将当期投注的全部数据刻入不可改写的光盘，作为查验的依据。
+            </p>
+            <p
+                style="margin-top: 10px; margin-bottom: 0px; padding: 0px; border: 0px; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-stretch: inherit; line-height: 36px; font-family: 宋体, sans-serif; color: rgb(51, 51, 51); text-indent: 2em; white-space: normal;">
+                第二十二条 &quot;双色球&quot;通过摇奖器确定中奖号码。摇奖时先摇出6个红色球号码，再摇出1个蓝色球号码，摇出的红色球号码按从小到大的顺序和蓝色球号码一起公布。
+            </p>
+            <p
+                style="margin-top: 10px; margin-bottom: 0px; padding: 0px; border: 0px; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-stretch: inherit; line-height: 36px; font-family: 宋体, sans-serif; color: rgb(51, 51, 51); text-indent: 2em; white-space: normal;">
+                第二十三条 开奖公告在各地主要媒体公布，并在各投注站张贴。
+            </p>
+            <p
+                style="margin-top: 10px; margin-bottom: 0px; padding: 0px; border: 0px; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-stretch: inherit; line-height: 36px; font-family: 宋体, sans-serif; color: rgb(51, 51, 51); text-indent: 2em; white-space: normal;">
+                第二十四条 &quot;双色球&quot;的开奖结果以中国福利彩票发行管理中心公布的开奖公告为准。
+            </p>
+            <h2
+                style="margin: 20px 0px; padding: 0px; border: 0px; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-stretch: inherit; font-size: 24px; line-height: 24px; font-family: 微软雅黑, Helvetica, Arial, sans-serif; font-weight: normal; color: rgb(183, 54, 52); text-indent: 10px; position: relative; white-space: normal;">
+                第六章 中 奖
+            </h2>
+            <p
+                style="margin-top: 10px; margin-bottom: 0px; padding: 0px; border: 0px; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-stretch: inherit; line-height: 36px; font-family: 宋体, sans-serif; color: rgb(51, 51, 51); text-indent: 2em; white-space: normal;">
+                第二十五条 &quot;双色球&quot;彩票以投注者所选单注投注号码（复式投注按所覆盖的单注计）与当期开出中奖号码相符的球色和个数确定中奖等级：
+            </p>
+            <p
+                style="margin-top: 10px; margin-bottom: 0px; padding: 0px; border: 0px; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-stretch: inherit; line-height: 36px; font-family: 宋体, sans-serif; color: rgb(51, 51, 51); text-indent: 2em; white-space: normal;">
+                一等奖：7个号码相符（6个红色球号码和1个蓝色球号码）（红色球号码顺序不限，下同）
+            </p>
+            <p
+                style="margin-top: 10px; margin-bottom: 0px; padding: 0px; border: 0px; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-stretch: inherit; line-height: 36px; font-family: 宋体, sans-serif; color: rgb(51, 51, 51); text-indent: 2em; white-space: normal;">
+                二等奖：6个红色球号码相符；
+            </p>
+            <p
+                style="margin-top: 10px; margin-bottom: 0px; padding: 0px; border: 0px; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-stretch: inherit; line-height: 36px; font-family: 宋体, sans-serif; color: rgb(51, 51, 51); text-indent: 2em; white-space: normal;">
+                三等奖：5个红色球号码和1个蓝色球号码相符；
+            </p>
+            <p
+                style="margin-top: 10px; margin-bottom: 0px; padding: 0px; border: 0px; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-stretch: inherit; line-height: 36px; font-family: 宋体, sans-serif; color: rgb(51, 51, 51); text-indent: 2em; white-space: normal;">
+                四等奖：5个红色球号码或4个红色球号码和1个蓝色球号码相符；
+            </p>
+            <p
+                style="margin-top: 10px; margin-bottom: 0px; padding: 0px; border: 0px; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-stretch: inherit; line-height: 36px; font-family: 宋体, sans-serif; color: rgb(51, 51, 51); text-indent: 2em; white-space: normal;">
+                五等奖：4个红色球号码或3个红色球号码和1个蓝色球号码相符；
+            </p>
+            <p
+                style="margin-top: 10px; margin-bottom: 0px; padding: 0px; border: 0px; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-stretch: inherit; line-height: 36px; font-family: 宋体, sans-serif; color: rgb(51, 51, 51); text-indent: 2em; white-space: normal;">
+                六等奖：1个蓝色球号码相符（有无红色球号码相符均可）。
+            </p>
+            <p
+                style="margin-top: 10px; margin-bottom: 0px; padding: 0px; border: 0px; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-stretch: inherit; line-height: 36px; font-family: 宋体, sans-serif; color: rgb(51, 51, 51); text-indent: 2em; white-space: normal;">
+                第二十六条 一等奖和二等奖中奖者按各奖级的中奖注数均分该奖级的奖金；三至六等奖按各奖级的单注固定奖额获得奖金。
+            </p>
+            <p
+                style="margin-top: 10px; margin-bottom: 0px; padding: 0px; border: 0px; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-stretch: inherit; line-height: 36px; font-family: 宋体, sans-serif; color: rgb(51, 51, 51); text-indent: 2em; white-space: normal;">
+                第二十七条 当期每注投注号码只有一次中奖机会，不能兼中兼得（另行设奖按设奖规定执行）。
+            </p>
+            <h2
+                style="margin: 20px 0px; padding: 0px; border: 0px; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-stretch: inherit; font-size: 24px; line-height: 24px; font-family: 微软雅黑, Helvetica, Arial, sans-serif; font-weight: normal; color: rgb(183, 54, 52); text-indent: 10px; position: relative; white-space: normal;">
+                第七章 兑 奖
+            </h2>
+            <p
+                style="margin-top: 10px; margin-bottom: 0px; padding: 0px; border: 0px; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-stretch: inherit; line-height: 36px; font-family: 宋体, sans-serif; color: rgb(51, 51, 51); text-indent: 2em; white-space: normal;">
+                第二十八条 &quot;双色球&quot;彩票兑奖当期有效。每期开奖次日起，兑奖期限为60天，逾期未兑奖者视为弃奖，弃奖奖金进入调节基金。
+            </p>
+            <p
+                style="margin-top: 10px; margin-bottom: 0px; padding: 0px; border: 0px; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-stretch: inherit; line-height: 36px; font-family: 宋体, sans-serif; color: rgb(51, 51, 51); text-indent: 2em; white-space: normal;">
+                第二十九条 中奖人须提交完整的兑奖彩票，因玷污、损坏等原因造成不能正确识别的，不能兑奖。
+            </p>
+            <p
+                style="margin-top: 10px; margin-bottom: 0px; padding: 0px; border: 0px; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-stretch: inherit; line-height: 36px; font-family: 宋体, sans-serif; color: rgb(51, 51, 51); text-indent: 2em; white-space: normal;">
+                <br />
+            </p>
+            <p
+                style="margin-top: 10px; margin-bottom: 0px; padding: 0px; border: 0px; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-stretch: inherit; line-height: 36px; font-family: 宋体, sans-serif; color: rgb(51, 51, 51); text-indent: 2em; white-space: normal;">
+                第三十条 一等奖中奖者，需持中奖彩票和本人有效身份证明，在兑奖期限内到各地省中心验证、登记和兑奖。其他奖级的兑奖办法由省中心规定并公布。
+            </p>
+            <p
+                style="margin-top: 10px; margin-bottom: 0px; padding: 0px; border: 0px; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-stretch: inherit; line-height: 36px; font-family: 宋体, sans-serif; color: rgb(51, 51, 51); text-indent: 2em; white-space: normal;">
+                第三十一条 按国家有关规定，单注奖金额超过一万元者，须缴纳个人偶然所得税。
+            </p>
+            <h2
+                style="margin: 20px 0px; padding: 0px; border: 0px; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-stretch: inherit; font-size: 24px; line-height: 24px; font-family: 微软雅黑, Helvetica, Arial, sans-serif; font-weight: normal; color: rgb(183, 54, 52); text-indent: 10px; position: relative; white-space: normal;">
+                第八章 附 则
+            </h2>
+            <p
+                style="margin-top: 10px; margin-bottom: 0px; padding: 0px; border: 0px; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-stretch: inherit; line-height: 36px; font-family: 宋体, sans-serif; color: rgb(51, 51, 51); text-indent: 2em; white-space: normal;">
+                第三十二条 本规则未尽事宜，均按《管理办法》和有关规定执行。
+            </p>
+            <p
+                style="margin-top: 10px; margin-bottom: 0px; padding: 0px; border: 0px; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-stretch: inherit; line-height: 36px; font-family: 宋体, sans-serif; color: rgb(51, 51, 51); text-indent: 2em; white-space: normal;">
+                第三十三条 本规则由中国福利彩票发行管理中心负责解释。
+            </p>
+            <p
+                style="margin-top: 10px; margin-bottom: 0px; padding: 0px; border: 0px; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-stretch: inherit; line-height: 36px; font-family: 宋体, sans-serif; color: rgb(51, 51, 51); text-indent: 2em; white-space: normal;">
+                第三十四条 本规则由自发布之日起施行。
+            </p>
+            <p>
+                <br />
+            </p>
+        </div>
+        <div class="content has-text-centered">
+            <span class=" subtitle is-6">本网站仅供学习交流，请勿用于商业用途</span>
+        </div>
+    </footer>
+</body>
+
+</html>
