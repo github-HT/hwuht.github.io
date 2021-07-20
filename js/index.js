@@ -43,7 +43,7 @@ function getAllRedBall (){
     for(let i = 0;i < count; i++ ){
         const num = getRedBall()
         // 如果取得的球已经存在，舍弃当前数字，取球次数加1
-        if (doubleColorBall.indexOf(num) > 0) {
+        if (doubleColorBall.indexOf(num) > -1) {
             count ++;
         } else {
             doubleColorBall.push(num);
